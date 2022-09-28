@@ -1,0 +1,31 @@
+body {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+p {
+  font-size: 1.75rem;
+}
+.input,
+.btn {
+  padding: 1rem;
+  border: 2px solid #26c281;
+  font-size: 1.25rem;
+  border-radius: 10px;
+}
+.input:focus-visible {
+  outline-color: #26c281;
+}
+.btn {
+  background-color: #26c281;
+  color: white;
+  margin-left: 1rem;
+}
+.copy-btn {
+  color: #1818b1;
+  font-size: 1.5rem;
+  outline: none;
+  border: none;
+  background-color: white !important;
+}

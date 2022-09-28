@@ -9,9 +9,16 @@ const generateShortURL = () => {
   const x = "https://bit.ly/" + sURL;
   document.getElementById("sURL").textContent = x;
 
-  let urls = sessionStorage.getItem("urls");
-  urls[lURL] = x;
-  sessionStorage.setItem("urls", urls);
+  let urls = localStorage.getItem("urls");
+  if (!urls) {
+    const obj = {};
+    obj[x] = lURL;
+    localStorage.setItem("urls", JSON.stringify(obj));
+  } else {
+    const newUrls = JSON.parse(urls);
+    newUrls[x] = lURL;
+    localStorage.setItem("urls", JSON.stringify(newUrls));
+  }
   document.getElementById("longUrl").value = "";
 };
 
@@ -19,7 +26,24 @@ const copy = (id) => {
   const copyText = document.getElementById(id).textContent;
   navigator.clipboard.writeText(copyText);
 };
-const retrieveLongURL = () => {};
+const retrieveLongURL = () => {
+  const sURL = document.getElementById("shortUrl").value;
+  if (!sURL) {
+    alert("You must Enter Url.");
+    return;
+  }
+
+  const urls = JSON.parse(localStorage.getItem("urls"));
+  const lURL = urls[sURL];
+  console.log(urls);
+  if (!lURL) {
+    alert("URL Not Found, Try Again.");
+    return;
+  }
+
+  document.getElementById("lURL").textContent = lURL;
+  document.getElementById("longUrl").value = "";
+};
 
 const getRandomURL = () => {
   const length = 7;
